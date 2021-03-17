@@ -59,7 +59,7 @@ int main(){
             {
                  get_time(&date_to_process);
             }
-            printf("Before send(IN BIG ENDIAN!!): \n");
+            printf("Before send(SQRT IN BIG ENDIAN!!): \n");
             show_struct(&date_to_process);
             sleep(3);
             safe_write(client_file_descryptor, &date_to_process, sizeof(struct data));
