@@ -68,12 +68,19 @@ int main(){
     safe_write(client_file_descriptor, &date_to_send, sizeof(struct data));
     safe_read(client_file_descriptor, &date_to_read, sizeof(struct data));
     printf("Received answer: \n");
-    if(__FLOAT_WORD_ORDER__ == LITTLE_ENDIAN){
-        double variable;
-        memcpy(&variable, date_to_read.variable, sizeof(double));
-        variable = reverse_number(variable);
-        memcpy(date_to_read.variable, &variable, sizeof(double));
+    int type = check_type(&date_to_read);
+    if(type == SET_SQRT){
+        if(__FLOAT_WORD_ORDER__ == LITTLE_ENDIAN){
+            double variable;
+            memcpy(&variable, date_to_read.variable, sizeof(double));
+            variable = reverse_number(variable);
+            memcpy(date_to_read.variable, &variable, sizeof(double));
+        }
     }
+
+    
+    
+    
     show_struct(&date_to_read);
     close(client_file_descriptor);
     printf("---------------------------\n");
